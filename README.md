@@ -1,6 +1,6 @@
 # Irodori-TTS Watermark Detector
 
-A browser-only detector for the audio watermark that [Irodori-TTS](../Irodori-TTS)
+A browser-only detector for the audio watermark that [Irodori-TTS](https://github.com/Aratako/Irodori-TTS)
 embeds into generated speech. Model inference runs in **WebAssembly**
 (onnxruntime-web, SIMD + threads); nothing is uploaded, no server-side component exists.
 
