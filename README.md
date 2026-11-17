@@ -1,8 +1,16 @@
 # Irodori-TTS Watermark Detector
 
+### → [caffeelake.github.io/irodori-tts-watermark-detector](https://caffeelake.github.io/irodori-tts-watermark-detector/)
+
 A browser-only detector for the audio watermark that [Irodori-TTS](https://github.com/Aratako/Irodori-TTS)
 embeds into generated speech. Model inference runs in **WebAssembly**
 (onnxruntime-web, SIMD + threads); nothing is uploaded, no server-side component exists.
+
+Drop a file on the page above to try it. Two things to expect on first visit: it
+downloads ~24 MB of WASM runtime and model, and it reloads itself once — GitHub Pages
+cannot send the COOP/COEP headers that onnxruntime-web needs for its thread pool, so a
+[service worker](web/coi-sw.js) supplies them instead. A verdict then takes ~30 s of
+inference for 6 s of audio; see [Limitations](#limitations--read-before-trusting-a-verdict).
 
 Irodori-TTS watermarks with [SilentCipher](https://github.com/sony/silentcipher)
 (`sony/silentcipher`, 44.1 kHz model) carrying the fixed 5-byte payload `IRDTS`:
@@ -32,23 +40,7 @@ So for 16 kHz audio there is no `IRDTS` to match. Detection is **payload-indepen
 we test for period-16 structure and report the raw 15-symbol word that was recovered.
 A 16 kHz detection confirms a SilentCipher watermark, **not** Irodori-TTS provenance.
 
-## Results
-
-### The four Irodori-TTS clips originally in this repository
-
-All four were watermarked by Irodori-TTS. Verdicts from the real browser (headless
-Firefox, WASM EP, 4 threads), stopping as soon as the evidence became conclusive:
-
-Analysed in full, every clip returned the payload byte-exactly —
-`[73, 82, 68, 84, 83]` = `"IRDTS"` — with p-values from 1.9e-39 to 1.5e-115, agreeing
-with the upstream `silentcipher` reference decoder.
-
-> **Note:** those four `.webm` files were deleted from the working tree by something
-> outside this project (no commit ever contained them, so they are not recoverable from
-> git). The table above is retained as the record of that run. The test suite now runs
-> entirely off the generated samples below, so it no longer depends on them.
-
-### Generated samples (reproducible)
+## Generated samples (reproducible)
 
 `pnpm run samples` embeds real watermarks into a synthesised, never-watermarked carrier,
 so each sample provably carries only the watermark we put there:
@@ -135,6 +127,9 @@ pnpm run test:dist       # verify the bundle the way both hosts serve it
 `dist/` is ~33 MB, almost all of it the 14 MB onnxruntime-web WASM runtime and two
 9 MB models. `./build.sh --no-16k` drops the 16 kHz model if you only care about
 Irodori output.
+
+The live deployment is on GitHub Pages:
+<https://caffeelake.github.io/irodori-tts-watermark-detector/>
 
 | | Cloudflare Pages | GitHub Pages |
 |---|---|---|
