@@ -1,0 +1,38 @@
+{
+  "name": "irodori-tts-watermark-detector",
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "description": "Browser/WebAssembly detector for the SilentCipher watermark embedded by Irodori-TTS",
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=12"
+  },
+  "scripts": {
+    "serve": "node tools/serve.mjs",
+    "vendor": "node tools/vendor.mjs",
+    "samples": "python tools/make_samples.py --variant 44.1k && python tools/make_samples.py --variant 16k && python tools/make_samples.py --variant 44.1k --payload HELLO --slug-suffix _hello --seconds 10",
+    "test": "node --test test/dsp.test.mjs test/parity.test.mjs test/variants.test.mjs test/payload.test.mjs test/e2e.test.mjs",
+    "test:unit": "node --test test/dsp.test.mjs",
+    "test:variants": "node --test test/variants.test.mjs",
+    "test:full": "FULL=1 node --test test/e2e.test.mjs",
+    "test:browser": "node test/browser.check.mjs",
+    "test:history": "node test/history.check.mjs",
+    "robustness": "node test/robustness.mjs",
+    "test:browser:variants": "node test/browser-variants.check.mjs",
+    "test:queue": "node test/queue.check.mjs",
+    "test:isolation": "node test/isolation.check.mjs",
+    "test:payload": "node --test test/payload.test.mjs",
+    "test:browser:payload": "node test/payload.check.mjs",
+    "build": "./build.sh",
+    "test:dist": "node test/dist.check.mjs",
+    "preview": "node tools/serve.mjs --root dist"
+  },
+  "dependencies": {
+    "onnxruntime-web": "^1.31.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.0"
+  }
+}

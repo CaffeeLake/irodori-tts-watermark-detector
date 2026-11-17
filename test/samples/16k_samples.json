@@ -1,0 +1,27 @@
+{
+  "variant": "16k",
+  "sample_rate": 16000,
+  "seconds": 14.0,
+  "carrier": "synth_speech (never watermarked)",
+  "message_len": 16,
+  "message_dim": 4,
+  "message_symbols": [
+    0,
+    1,
+    2,
+    2,
+    1,
+    0,
+    1,
+    2,
+    0,
+    0,
+    2,
+    1,
+    1,
+    2,
+    0
+  ],
+  "note": "The 16 kHz model cannot carry a byte payload (15 symbol slots vs. 4 symbols per byte), so this is a raw symbol word with values 0..2. 16k_clean.wav is the same carrier with no watermark.",
+  "sdr_db": 50.75
+}

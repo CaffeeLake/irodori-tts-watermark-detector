@@ -1,0 +1,18 @@
+{
+  "variant": "44.1k",
+  "sample_rate": 44100,
+  "seconds": 10.0,
+  "carrier": "synth_speech (never watermarked)",
+  "message_len": 21,
+  "message_dim": 5,
+  "payload": [
+    72,
+    69,
+    76,
+    76,
+    79
+  ],
+  "payload_ascii": "HELLO",
+  "note": "Genuine Irodori payload embedded with the upstream encode_wav(); 44k1_hello_clean.wav is the same carrier with no watermark.",
+  "sdr_db": 49.96
+}

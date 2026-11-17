@@ -1,0 +1,18 @@
+{
+  "variant": "44.1k",
+  "sample_rate": 44100,
+  "seconds": 14.0,
+  "carrier": "synth_speech (never watermarked)",
+  "message_len": 21,
+  "message_dim": 5,
+  "payload": [
+    73,
+    82,
+    68,
+    84,
+    83
+  ],
+  "payload_ascii": "IRDTS",
+  "note": "Genuine Irodori payload embedded with the upstream encode_wav(); 44k1_clean.wav is the same carrier with no watermark.",
+  "sdr_db": 50.2
+}

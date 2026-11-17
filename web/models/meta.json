@@ -1,0 +1,47 @@
+{
+  "comment": "SilentCipher message decoders for Irodori-TTS watermark detection",
+  "average_energy_vctk": 0.002837200844477648,
+  "irodori_variant": "44.1k",
+  "variants": {
+    "44.1k": {
+      "variant": "44.1k",
+      "model": "dec_m_0.44k1.onnx",
+      "sample_rate": 44100,
+      "n_fft": 4096,
+      "hop_length": 2048,
+      "message_band_size": 1024,
+      "message_dim": 5,
+      "message_len": 21,
+      "n_messages": 1,
+      "message_sdr": 47,
+      "symbol_slots": 20,
+      "byte_payload_supported": true,
+      "payload": [
+        73,
+        82,
+        68,
+        84,
+        83
+      ],
+      "payload_ascii": "IRDTS",
+      "payload_bits": 40
+    },
+    "16k": {
+      "variant": "16k",
+      "model": "dec_m_0.16k.onnx",
+      "sample_rate": 16000,
+      "n_fft": 2048,
+      "hop_length": 1024,
+      "message_band_size": 512,
+      "message_dim": 4,
+      "message_len": 16,
+      "n_messages": 1,
+      "message_sdr": 47,
+      "symbol_slots": 15,
+      "byte_payload_supported": false,
+      "payload": null,
+      "payload_ascii": null,
+      "note": "message_len-1 = 15 symbol slots and message_dim = 4; silentcipher's byte encoder emits 4 symbols per byte with one-hot index symbol+1, so no byte payload can be encoded or decoded for this variant. Detection is payload-independent (period-16 structure) only."
+    }
+  }
+}
